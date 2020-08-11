@@ -1,7 +1,6 @@
 import {
     API_BASE
 } from '../../config'
-import { identity } from 'lodash'
 
 const MODULE_BASE = 'users'
 

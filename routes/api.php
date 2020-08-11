@@ -20,7 +20,7 @@ Route::group([
 ], function () {
 
     Route::apiResource('/users', 'UserApiController');
-    Route::apiResource('/form', 'FormApiController');
+    Route::apiResource('/forms', 'FormApiController');
 
 });
 

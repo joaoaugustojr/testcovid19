@@ -6,22 +6,18 @@
         </div>
     
         <div id="accordion">
-
             <div class="card">
-
                 <div class="card-header p-3" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <h6 class="mb-0">
                         <i class="icon fas fa-th-list"></i>
                         Lista de Usuários
                     </h6>
                 </div>
-
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" data-js="div">
                     <div v-if="users.data.length > 0 && !loading" class="card-body">
                         <Table :users="users"></Table>
                     </div>
                 </div>
-
             </div>
         </div>
 

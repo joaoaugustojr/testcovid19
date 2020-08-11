@@ -10,7 +10,9 @@
             </ol>
         </nav>
 
-        <div class="button-group">
+        <form-component></form-component>
+
+        {{-- <div class="button-group">
             <a class="btn btn-success mb-3" href="#"><i class="icon fas fa-plus"></i> Preencher Novo Formulário </a>
         </div>
         
@@ -33,6 +35,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

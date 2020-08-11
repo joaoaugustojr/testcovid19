@@ -61,7 +61,7 @@
 
 <script>
 
-import { mapActions, mapState, mapGetters} from 'vuex';
+import { mapActions, mapState} from 'vuex';
 import Form from './Form';
 
 export default {

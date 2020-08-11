@@ -29,6 +29,7 @@ class CreateFormsTable extends Migration
             $table->boolean('lack_of_taste'); // Falta de Paladar
             $table->boolean('loss_of_smell'); // Falta de Olfato
             $table->boolean('locomotion_difficulty'); // Dificuldade de Locomoção
+            $table->boolean('diarrhea'); // Diarreia
             $table->double('result')->nullable(); // Resultado da Consulta
             $table->timestamps();
 

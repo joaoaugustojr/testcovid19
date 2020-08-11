@@ -17,10 +17,12 @@ class User extends Model
 
     // Mutators
 
-    // Relationships
-
     public function getCreatedAtAttribute($value)
     {
         return (new Carbon($value))->format('d/m/Y H:i:s');
     }
+
+    // Relationships
+
+    
 }

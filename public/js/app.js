@@ -1920,11 +1920,733 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _partials_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_partials/Table */ "./resources/js/components/Forms/_partials/Table.vue");
+/* harmony import */ var _partials_FormAdd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_partials/FormAdd */ "./resources/js/components/Forms/_partials/FormAdd.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.loadUsers();
+    this.loadForms();
+  },
+  data: function data() {
+    return {
+      clear: false,
+      loading: false
+    };
+  },
+  components: {
+    Table: _partials_Table__WEBPACK_IMPORTED_MODULE_1__["default"],
+    FormAdd: _partials_FormAdd__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    active_button_add_form: function active_button_add_form(state) {
+      return state.forms.active_button_add_form;
+    },
+    forms: function forms(state) {
+      return state.forms.forms;
+    },
+    users: function users(state) {
+      return state.users.users;
+    }
+  })),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getUsers', 'saveForm', 'getForms'])), {}, {
+    loadUsers: function loadUsers() {
+      var _this = this;
+
+      this.loading = true;
+      this.getUsers()["catch"](function (error) {
+        Vue.$toast.open({
+          message: 'Erro ao listar usuários!',
+          type: 'error',
+          position: 'top-right'
+        });
+      })["finally"](function () {
+        _this.loading = false;
+      });
+    },
+    loadForms: function loadForms() {
+      var _this2 = this;
+
+      this.loading = true;
+      this.getForms()["catch"](function (error) {
+        Vue.$toast.open({
+          message: 'Erro ao listar formulários!',
+          type: 'error',
+          position: 'top-right'
+        });
+      })["finally"](function () {
+        _this2.loading = false;
+      });
+    },
+    addForm: function addForm() {
+      var _this3 = this;
+
+      var formData = new FormData(document.getElementById("form-add"));
+      this.$swal.fire({
+        title: '',
+        text: "Realmente Deseja Executar esta ação?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, registrar formulário!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#38c172',
+        cancelButtonColor: '#6c757d'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.saveForm(formData).then(function (response) {
+            var result = response.data.result;
+
+            if (result >= 60) {
+              _this3.$swal.fire('Resultado:', 'Possível Infectado!', 'error').then(function (result) {
+                _this3.close();
+              });
+            } else if (result >= 40 && result < 60) {
+              _this3.$swal.fire('Resultado:', 'Potencial Infectado!', 'warning').then(function (result) {
+                _this3.close();
+              });
+            } else if (result < 40) {
+              _this3.$swal.fire('Resultado:', 'Sintomas Insuficientes!', 'success').then(function (result) {
+                _this3.close();
+              });
+            }
+          })["catch"](function (error) {
+            Vue.$toast.open({
+              message: 'Erro ao registrar formulário!',
+              type: 'error',
+              position: 'top-right'
+            });
+          })["finally"](function () {
+            _this3.clear = false;
+          });
+        }
+      });
+    },
+    close: function close() {
+      this.clear = true;
+      this.loadUsers();
+      this.loadForms();
+      $('.btn-close').click();
+      Vue.$toast.open({
+        message: 'Formulário de consulta, registrado com sucesso!',
+        type: 'success',
+        position: 'top-right'
+      });
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['users', 'loading', 'clear'],
+  data: function data() {
+    return {
+      user_selected: '',
+      user_name: '',
+      fever: 1,
+      // Febre
+      coryza: 1,
+      // Coriza
+      stuffy_nose: 1,
+      // Nariz Entupido
+      tiredness: 1,
+      // Cansaço
+      cough: 1,
+      // Tosse
+      headache: 1,
+      // Dor de Cabeça
+      body_aches: 1,
+      // Dores no Corpo
+      general_discomfort: 1,
+      // Mal Estar Geral
+      sore_throat: 1,
+      // Dor de Garganta
+      dyspnea: 1,
+      // Dificuldade de Respirar
+      lack_of_taste: 1,
+      // Falta de Paladar
+      loss_of_smell: 1,
+      // Falta de Olfato
+      locomotion_difficulty: 1,
+      // Dificuldade de Locomoção
+      diarrhea: 1 // Diarreia
+
+    };
+  },
+  computed: {
+    validate: function validate() {
+      if (this.user_selected == '' || this.user_name == '') {
+        this.activeButton(true);
+        return true;
+      }
+
+      this.activeButton(false);
+      return false;
+    }
+  },
+  watch: {
+    clear: function clear() {
+      if (this.clear) {
+        this.user_selected = '';
+        this.user_name = '';
+        this.fever = 1;
+        this.coryza = 1;
+        this.stuffy_nose = 1;
+        this.tiredness = 1;
+        this.cough = 1;
+        this.headache = 1;
+        this.body_aches = 1;
+        this.general_discomfort = 1;
+        this.sore_throat = 1;
+        this.dyspnea = 1;
+        this.lack_of_taste = 1;
+        this.loss_of_smell = 1;
+        this.locomotion_difficulty = 1;
+        this.diarrhea = 1;
+      }
+    }
+  },
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])({
+    activeButtonAddForm: 'ACTIVE_BUTTON_ADD_FORM'
+  })), {}, {
+    activeButton: function activeButton(active) {
+      this.activeButtonAddForm(active);
+    },
+    selectedUserChange: function selectedUserChange() {
+      if (this.users.data.length > 0) {
+        var id = this.user_selected;
+        var member = this.users.data.find(function (element) {
+          return element.id == id;
+        });
+
+        if (member !== undefined) {
+          this.user_name = member.name;
+        } else {
+          this.user_name = '';
+        }
+      } else {
+        this.user_name = '';
+      }
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['forms'],
+  data: function data() {
+    return {
+      loading: false
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    form: function form(state) {
+      return state.forms.form;
+    }
+  })),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['removeForm', 'getForms', 'getForm'])), {}, {
+    loadForms: function loadForms() {
+      var _this = this;
+
+      this.loading = true;
+      this.getForms()["catch"](function (error) {
+        Vue.$toast.open({
+          message: 'Erro ao listar formulários!',
+          type: 'error',
+          position: 'top-right'
+        });
+      })["finally"](function () {
+        _this.loading = false;
+      });
+    },
+    loadForm: function loadForm(id) {
+      var _this2 = this;
+
+      this.loading = true;
+      this.getForm(id)["catch"](function (error) {
+        Vue.$toast.open({
+          message: 'Erro ao listar formulário!',
+          type: 'error',
+          position: 'top-right'
+        });
+      })["finally"](function () {
+        _this2.loading = false;
+      });
+    },
+    removeElement: function removeElement(id) {
+      var _this3 = this;
+
+      this.$swal.fire({
+        title: '',
+        text: "Realmente Deseja Executar esta ação? Esta ação não poderá ser desfeita!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, remover registro!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#38c172',
+        cancelButtonColor: '#6c757d'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.removeForm(id).then(function (response) {
+            Vue.$toast.open({
+              message: 'Formulário removido com sucesso!',
+              type: 'success',
+              position: 'top-right'
+            });
+
+            _this3.loadForms();
+          })["catch"](function (error) {
+            Vue.$toast.open({
+              message: 'Erro ao remover Formulário!',
+              type: 'error',
+              position: 'top-right'
+            });
+
+            _this3.loadForms();
+          });
+        }
+      });
+    },
+    getUrlWhats: function getUrlWhats(number) {
+      var number = number.replace(/[^\d]+/g, '');
+      var url = "https://api.whatsapp.com/send?phone=55".concat(number, "&text=Ol%C3%A1!%20Tudo%20bem%3F");
+      return url;
+    }
+  })
+});
 
 /***/ }),
 
@@ -1946,10 +2668,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -42698,9 +43416,2251 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "accordion" } }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse show",
+            attrs: {
+              id: "collapseOne",
+              "aria-labelledby": "headingOne",
+              "data-parent": "#accordion",
+              "data-js": "div"
+            }
+          },
+          [
+            _vm.forms.data.length > 0 && !_vm.loading
+              ? _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [_c("Table", { attrs: { forms: _vm.forms } })],
+                  1
+                )
+              : _vm._e()
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modal-add-view",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modal-add-view",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered modal-md",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: { id: "form-add" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.addForm($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "modal-body" },
+                    [
+                      _c("FormAdd", {
+                        attrs: {
+                          clear: _vm.clear,
+                          users: _vm.users,
+                          loading: _vm.loading
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          type: "submit",
+                          disabled: _vm.active_button_add_form
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "icon fas fa-plus" }),
+                        _vm._v(" Registrar")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary btn-close",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Sair")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "button-group" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success mb-3",
+          attrs: {
+            href: "#",
+            role: "button",
+            alt: "preencher formulário",
+            title: "Preencher Novo Formulário",
+            "data-toggle": "modal",
+            "data-target": "#modal-add-view"
+          }
+        },
+        [
+          _c("i", { staticClass: "icon fas fa-plus" }),
+          _vm._v(" Preencher Novo Formulário")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-secondary mb-3",
+          attrs: {
+            href: "users",
+            role: "button",
+            alt: "adicionar usuário",
+            title: "Adicionar Usuário"
+          }
+        },
+        [
+          _c("i", { staticClass: "icon fas fa-user-plus" }),
+          _vm._v(" Adicionar Novo Usuário")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-header p-3",
+        attrs: {
+          id: "headingOne",
+          "data-toggle": "collapse",
+          "data-target": "#collapseOne",
+          "aria-expanded": "true",
+          "aria-controls": "collapseOne"
+        }
+      },
+      [
+        _c("h6", { staticClass: "mb-0" }, [
+          _c("i", { staticClass: "icon fas fa-th-list" }),
+          _vm._v(
+            "\n                   Formulários Preenchidos\n               "
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h6",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [
+          _c("i", { staticClass: "icon mr-2 fas fa-th-list" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Preencher Formulário")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row", attrs: { validate: _vm.validate } }, [
+    _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+      _c("div", { staticClass: "alert alert-info", attrs: { role: "alert" } }, [
+        _vm._v(
+          "\n            1º Selecione o usuário: " +
+            _vm._s(_vm.user_name) +
+            "\n        "
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-4 col-md-12 col-sm-12 col-12" }, [
+      _c("label", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group mb-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user_selected,
+              expression: "user_selected"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            name: "id",
+            min: "1",
+            step: "1",
+            title: "Id do Usuário"
+          },
+          domProps: { value: _vm.user_selected },
+          on: {
+            change: function($event) {
+              return _vm.selectedUserChange()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.user_selected = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-8 col-md-12 col-sm-12 col-12" }, [
+      _c("label", { attrs: { for: "basic-url" } }, [_vm._v("Nome do Usuário")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group mb-3" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user_selected,
+                expression: "user_selected"
+              }
+            ],
+            staticClass: "custom-select form-control input-tab",
+            attrs: { name: "name", id: "tab1", title: "Nome do Membro" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.user_selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  return _vm.selectedUserChange()
+                }
+              ]
+            }
+          },
+          [
+            _vm.loading
+              ? _c("option", { attrs: { value: "" } }, [_vm._v("Carregando")])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "" } }),
+            _vm._v(" "),
+            _vm._l(_vm.users.data, function(user, index) {
+              return _c(
+                "option",
+                { key: index, domProps: { value: user.id } },
+                [_vm._v(_vm._s(user.name))]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.user_name && _vm.user_selected
+      ? _c("span", { staticClass: "w-100" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fever,
+                            expression: "fever"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "fever1", name: "fever" },
+                        domProps: { value: 0, checked: _vm._q(_vm.fever, 0) },
+                        on: {
+                          change: function($event) {
+                            _vm.fever = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "fever1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fever,
+                            expression: "fever"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "fever2", name: "fever" },
+                        domProps: { value: 1, checked: _vm._q(_vm.fever, 1) },
+                        on: {
+                          change: function($event) {
+                            _vm.fever = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "fever2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.coryza,
+                            expression: "coryza"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "coryza1", name: "coryza" },
+                        domProps: { value: 0, checked: _vm._q(_vm.coryza, 0) },
+                        on: {
+                          change: function($event) {
+                            _vm.coryza = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "coryza1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.coryza,
+                            expression: "coryza"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "coryza2", name: "coryza" },
+                        domProps: { value: 1, checked: _vm._q(_vm.coryza, 1) },
+                        on: {
+                          change: function($event) {
+                            _vm.coryza = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "coryza2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.stuffy_nose,
+                            expression: "stuffy_nose"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "stuffy_nose1",
+                          name: "stuffy_nose"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.stuffy_nose, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.stuffy_nose = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "stuffy_nose1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.stuffy_nose,
+                            expression: "stuffy_nose"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "stuffy_nose2",
+                          name: "stuffy_nose"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.stuffy_nose, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.stuffy_nose = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "stuffy_nose2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tiredness,
+                            expression: "tiredness"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "tiredness1",
+                          name: "tiredness"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.tiredness, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.tiredness = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "tiredness1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tiredness,
+                            expression: "tiredness"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "tiredness2",
+                          name: "tiredness"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.tiredness, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.tiredness = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "tiredness2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(7),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.cough,
+                            expression: "cough"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "cough1", name: "cough" },
+                        domProps: { value: 0, checked: _vm._q(_vm.cough, 0) },
+                        on: {
+                          change: function($event) {
+                            _vm.cough = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "cough1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.cough,
+                            expression: "cough"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "radio", id: "cough2", name: "cough" },
+                        domProps: { value: 1, checked: _vm._q(_vm.cough, 1) },
+                        on: {
+                          change: function($event) {
+                            _vm.cough = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "cough2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.headache,
+                            expression: "headache"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "headache1",
+                          name: "headache"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.headache, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.headache = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "headache1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.headache,
+                            expression: "headache"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "headache2",
+                          name: "headache"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.headache, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.headache = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "headache2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(9),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.body_aches,
+                            expression: "body_aches"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "body_aches1",
+                          name: "body_aches"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.body_aches, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.body_aches = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "body_aches1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.body_aches,
+                            expression: "body_aches"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "body_aches2",
+                          name: "body_aches"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.body_aches, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.body_aches = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "body_aches2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.general_discomfort,
+                            expression: "general_discomfort"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "general_discomfort1",
+                          name: "general_discomfort"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.general_discomfort, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.general_discomfort = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "general_discomfort1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.general_discomfort,
+                            expression: "general_discomfort"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "general_discomfort2",
+                          name: "general_discomfort"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.general_discomfort, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.general_discomfort = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "general_discomfort2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(11),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.sore_throat,
+                            expression: "sore_throat"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "sore_throat1",
+                          name: "sore_throat"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.sore_throat, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.sore_throat = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "sore_throat1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.sore_throat,
+                            expression: "sore_throat"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "sore_throat2",
+                          name: "sore_throat"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.sore_throat, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.sore_throat = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "sore_throat2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(12),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.dyspnea,
+                            expression: "dyspnea"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "dyspnea1",
+                          name: "dyspnea"
+                        },
+                        domProps: { value: 0, checked: _vm._q(_vm.dyspnea, 0) },
+                        on: {
+                          change: function($event) {
+                            _vm.dyspnea = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "dyspnea1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.dyspnea,
+                            expression: "dyspnea"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "dyspnea2",
+                          name: "dyspnea"
+                        },
+                        domProps: { value: 1, checked: _vm._q(_vm.dyspnea, 1) },
+                        on: {
+                          change: function($event) {
+                            _vm.dyspnea = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "dyspnea2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(13),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.lack_of_taste,
+                            expression: "lack_of_taste"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "lack_of_taste1",
+                          name: "lack_of_taste"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.lack_of_taste, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.lack_of_taste = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "lack_of_taste1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.lack_of_taste,
+                            expression: "lack_of_taste"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "lack_of_taste2",
+                          name: "lack_of_taste"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.lack_of_taste, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.lack_of_taste = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "lack_of_taste2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(14),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.loss_of_smell,
+                            expression: "loss_of_smell"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "loss_of_smell1",
+                          name: "loss_of_smell"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.loss_of_smell, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.loss_of_smell = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "loss_of_smell1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.loss_of_smell,
+                            expression: "loss_of_smell"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "loss_of_smell2",
+                          name: "loss_of_smell"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.loss_of_smell, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.loss_of_smell = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "loss_of_smell2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(15),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.locomotion_difficulty,
+                            expression: "locomotion_difficulty"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "locomotion_difficulty1",
+                          name: "locomotion_difficulty"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.locomotion_difficulty, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.locomotion_difficulty = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "locomotion_difficulty1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.locomotion_difficulty,
+                            expression: "locomotion_difficulty"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "locomotion_difficulty2",
+                          name: "locomotion_difficulty"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.locomotion_difficulty, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.locomotion_difficulty = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "locomotion_difficulty2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3 justify-content-between" },
+              [
+                _vm._m(16),
+                _vm._v(" "),
+                _c("span", [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.diarrhea,
+                            expression: "diarrhea"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "diarrhea1",
+                          name: "diarrhea"
+                        },
+                        domProps: {
+                          value: 0,
+                          checked: _vm._q(_vm.diarrhea, 0)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.diarrhea = 0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "diarrhea1" }
+                        },
+                        [_vm._v("Sim")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "custom-control custom-radio custom-control-inline"
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.diarrhea,
+                            expression: "diarrhea"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: {
+                          type: "radio",
+                          id: "diarrhea2",
+                          name: "diarrhea"
+                        },
+                        domProps: {
+                          value: 1,
+                          checked: _vm._q(_vm.diarrhea, 1)
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.diarrhea = 1
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "diarrhea2" }
+                        },
+                        [_vm._v("Não")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "icon fas fa-id-card-alt" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "icon fas fa-user" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+      _c("div", { staticClass: "alert alert-info", attrs: { role: "alert" } }, [
+        _vm._v(
+          "\n                2º Marque 'Sim' para os sintomas apresentados!\n            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Febre?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Coriza?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Nariz Entupido?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Cansaço?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Tosse?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Dor de Cabeça?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Dores no Corpo?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Mal estar em geral?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Dor de garganta?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Dificuldade de respirar?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Falta de paladar?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Falta de olfato?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Dificuldade de locomoção?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mr-3" }, [
+      _c("i", {
+        staticClass: "icon fas fa-briefcase-medical mr-1 text-success"
+      }),
+      _c("b", [_vm._v("Diarreia?")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "table-responsive" }, [
+    _c(
+      "table",
+      {
+        staticClass: "table table-bordered table-hover",
+        staticStyle: { width: "100%" },
+        attrs: { id: "datatables-style" }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.forms.data, function(record, index) {
+            return _c("tr", { key: index }, [
+              _c("td", { attrs: { scope: "row" } }, [
+                _vm._v(_vm._s(record.id))
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(record.user.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(record.user.whatsapp_number))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(record.result_text))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(record.created_at))]),
+              _vm._v(" "),
+              _c("td", { attrs: { nowrap: "" } }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-secondary btn-sm",
+                    attrs: {
+                      href: "#",
+                      role: "button",
+                      title: "Visualizar Formulário",
+                      alt: "Visualizar Formulário",
+                      "data-toggle": "modal",
+                      "data-target": "#modal-edit-view"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.loadForm(record.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "icon fas fa-eye" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    attrs: {
+                      href: "#",
+                      role: "button",
+                      title: "Remover Formulário",
+                      alt: "Remover Formulário"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.removeElement(record.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "icon fas fa-trash" })]
+                ),
+                _vm._v(" "),
+                record.user.whatsapp_number
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        attrs: {
+                          href: _vm.getUrlWhats(record.user.whatsapp_number),
+                          target: "_blank",
+                          role: "button",
+                          title: "Enviar Mensagem",
+                          alt: "Enviar Mensagem"
+                        }
+                      },
+                      [_c("i", { staticClass: "icon fab fa-whatsapp" })]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          }),
+          0
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modal-edit-view",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modal-edit-view",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered modal-md",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h6",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLongTitle" }
+                  },
+                  [
+                    _c("i", { staticClass: "icon mr-2 fas fa-eye" }),
+                    _vm._v(" "),
+                    _vm.loading
+                      ? _c("span", [_vm._v("Carregando...")])
+                      : _c("span", [_vm._v("Formulário de Consulta:")])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ]),
+              _vm._v(" "),
+              !_vm.loading && _vm.form
+                ? _c("form", [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("ul", { staticClass: "list-group mb-3" }, [
+                        _c("li", { staticClass: "list-group-item active" }, [
+                          _c("i", { staticClass: "icon mr-2 fas fa-user" }),
+                          _vm._v(_vm._s(_vm.form.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _vm.form.user.whatsapp_number
+                          ? _c("li", { staticClass: "list-group-item" }, [
+                              _c("i", {
+                                staticClass:
+                                  "icon mr-2 fab fa-whatsapp text-success"
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: _vm.getUrlWhats(
+                                      _vm.form.user.whatsapp_number
+                                    ),
+                                    target: "_blank",
+                                    title: "Enviar Mensagem",
+                                    alt: "Enviar Mensagem"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.form.user.whatsapp_number))]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v(
+                            "Data de Consulta: " + _vm._s(_vm.form.created_at)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Resultado: "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.result_text))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "list-group" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Febre? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.fever))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Coriza? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.coryza))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Nariz Entupido? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.stuffy_nose))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Cansaço? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.tiredness))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Tosse? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.cough))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Dor de Cabeça? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.headache))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Dores no Corpo? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.body_aches))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Mal estar em geral? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.general_discomfort))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Dor de garganta? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.sore_throat))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Dificuldade de respirar? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.dyspnea))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Falta de paladar? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.lack_of_taste))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Falta de olfato? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.loss_of_smell))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Dificuldade de locomoção? "),
+                          _c("b", [
+                            _vm._v(_vm._s(_vm.form.locomotion_difficulty))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _vm._v("Diarreia? "),
+                          _c("b", [_vm._v(_vm._s(_vm.form.diarrhea))])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ])
+                : _vm._e()
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col", "data-priority": "1" } }, [
+          _vm._v("ID")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col", "data-priority": "2" } }, [
+          _vm._v("Nome")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Whatsapp")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Resultado")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data Registro")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ações")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item active" }, [
+      _c("i", { staticClass: "icon mr-2 fas fa-briefcase-medical" }),
+      _vm._v("Sintomas Analizados:")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary btn-close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Sair")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -57278,6 +60238,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Forms/_partials/FormAdd.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/FormAdd.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormAdd.vue?vue&type=template&id=26ef0384& */ "./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384&");
+/* harmony import */ var _FormAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Forms/_partials/FormAdd.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./FormAdd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./FormAdd.vue?vue&type=template&id=26ef0384& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/FormAdd.vue?vue&type=template&id=26ef0384&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAdd_vue_vue_type_template_id_26ef0384___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/_partials/Table.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/Table.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Table.vue?vue&type=template&id=1b87c155& */ "./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155&");
+/* harmony import */ var _Table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Table.vue?vue&type=script&lang=js& */ "./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Forms/_partials/Table.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Table.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/Table.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Table.vue?vue&type=template&id=1b87c155& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Forms/_partials/Table.vue?vue&type=template&id=1b87c155&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_1b87c155___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Users/UserComponent.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Users/UserComponent.vue ***!
@@ -57745,7 +60843,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toast_notification__WEBPACK_I
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./resources/js/config/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../config */ "./resources/js/config/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 var MODULE_BASE = 'forms';
 var CONFIGS = {
@@ -57753,7 +60859,93 @@ var CONFIGS = {
     'content-type': 'multipart/form-data'
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // api
+  getForms: function getForms(context) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios.get("".concat(_config__WEBPACK_IMPORTED_MODULE_1__["API_BASE"]).concat(MODULE_BASE)).then(function (response) {
+                return context.commit('LOAD_FORMS', response.data);
+              });
+
+            case 2:
+              return _context.abrupt("return", _context.sent);
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  getForm: function getForm(context, id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios.get("".concat(_config__WEBPACK_IMPORTED_MODULE_1__["API_BASE"]).concat(MODULE_BASE, "/").concat(id)).then(function (response) {
+                return context.commit('LOAD_FORM', response.data);
+              });
+
+            case 2:
+              return _context2.abrupt("return", _context2.sent);
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  saveForm: function saveForm(context, formData) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios.post("".concat(_config__WEBPACK_IMPORTED_MODULE_1__["API_BASE"]).concat(MODULE_BASE), formData, CONFIGS);
+
+            case 2:
+              return _context3.abrupt("return", _context3.sent);
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  removeForm: function removeForm(context, id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return axios["delete"]("".concat(_config__WEBPACK_IMPORTED_MODULE_1__["API_BASE"]).concat(MODULE_BASE, "/").concat(id));
+
+            case 2:
+              return _context4.abrupt("return", _context4.sent);
+
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+  }
+});
 
 /***/ }),
 
@@ -57789,7 +60981,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  LOAD_FORMS: function LOAD_FORMS(state, forms) {
+    state.forms = forms;
+  },
+  LOAD_FORM: function LOAD_FORM(state, form) {
+    state.form = form.data;
+  },
+  ACTIVE_BUTTON_ADD_FORM: function ACTIVE_BUTTON_ADD_FORM(state, active) {
+    state.active_button_add_form = active;
+  }
+});
 
 /***/ }),
 
@@ -57802,7 +61004,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  forms: {
+    data: []
+  },
+  form: '',
+  active_button_add_form: true
+});
 
 /***/ }),
 
@@ -57847,14 +61055,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../config */ "./resources/js/config/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 var MODULE_BASE = 'users';
