@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [LARAVEL](https://laravel.com/)
 - [VUE](https://vuejs.org/)
-- [BOOSTRAP](https://getbootstrap.com/)
+- [BOOTSTRAP](https://getbootstrap.com/)
 - [SASS](https://sass-lang.com/)
 - [JQUERY](https://jquery.com/)
 - [DATATABLES](https://datatables.net/)
