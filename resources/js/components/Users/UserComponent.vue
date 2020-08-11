@@ -3,6 +3,7 @@
 
         <div class="button-group">
             <a class="btn btn-success mb-3" href="#" role="button" alt="adicionar usuário" title="Adicionar Usuário" data-toggle="modal" data-target="#modal-add-view"><i class="icon fas fa-plus"></i> Adicionar Novo Usuário </a>
+            <a class="btn btn-secondary mb-3" href="forms" role="button" alt="preencher novo formulário" title="Preencher Novo Formulário"><i class="icon fas fa-th-list"></i> Preencher Novo Formulário</a>
         </div>
     
         <div id="accordion">

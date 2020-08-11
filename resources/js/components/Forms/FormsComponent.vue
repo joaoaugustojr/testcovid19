@@ -14,7 +14,7 @@
                     </h6>
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" data-js="div">
-                    <div v-if="forms.data> 0 && !loading" class="card-body">
+                    <div v-if="forms.data.length > 0 && !loading" class="card-body">
                         <Table :forms="forms"></Table>
                     </div>
                 </div>
