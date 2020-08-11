@@ -2762,6 +2762,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var formData = new FormData(document.getElementById("form-add"));
+      formData.append('photo', $('input[type=file]')[0].files[0]);
       this.saveUser(formData).then(function (response) {
         _this2.clear = true;
         Vue.$toast.open({
@@ -2814,6 +2815,21 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2975,6 +2991,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['clear'],
@@ -2984,6 +3010,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       name: '',
       age: '',
       number: '',
+      photo: '',
       cpfValid: true,
       numberValid: true
     };
@@ -3002,8 +3029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     clear: function clear() {
       if (this.clear) {
-        this.cpf = '', this.name = '', this.age = '', this.number = '', this.cpfValid = true, this.numberValid = true;
-        console.log('limpou');
+        this.cpf = '', this.name = '', this.age = '', this.number = '', this.cpfValid = true, this.numberValid = true, $('input[type=file]').val('');
       }
     }
   },
@@ -43435,7 +43461,7 @@ var render = function() {
             }
           },
           [
-            _vm.forms.data.length > 0 && !_vm.loading
+            _vm.forms.data > 0 && !_vm.loading
               ? _c(
                   "div",
                   { staticClass: "card-body" },
@@ -46041,7 +46067,24 @@ var render = function() {
             }
           })
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      !_vm.view
+        ? _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _vm._m(4)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.user.photo_url
+        ? _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+            _c("div", { staticClass: "text-center mb-3" }, [
+              _c("img", {
+                staticClass: "img-thumbnail img-user",
+                attrs: { src: "/storage/" + _vm.user.photo_url, alt: "Photo" }
+              })
+            ])
+          ])
+        : _vm._e()
     ]
   )
 }
@@ -46083,6 +46126,32 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "icon fab fa-whatsapp" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card mb-3" }, [
+      _c("div", { staticClass: "card-header d-flex" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("label", { attrs: { for: "exampleFormControlFile1" } }, [
+            _c("i", { staticClass: "fas fa-image" }),
+            _vm._v(" Escolher Foto 3x4:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: {
+              type: "file",
+              name: "photo",
+              title: "Foto do Membro",
+              accept: "image/png, image/jpeg",
+              multiple: ""
+            }
+          })
+        ])
       ])
     ])
   }
@@ -46254,7 +46323,9 @@ var render = function() {
             }
           })
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm._m(4)
     ]
   )
 }
@@ -46296,6 +46367,34 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "icon fab fa-whatsapp" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 col-12" }, [
+      _c("div", { staticClass: "card mb-3" }, [
+        _c("div", { staticClass: "card-header d-flex" }, [
+          _c("div", { staticClass: "input-group" }, [
+            _c("label", { attrs: { for: "exampleFormControlFile1" } }, [
+              _c("i", { staticClass: "fas fa-image" }),
+              _vm._v(" Escolher Foto 3x4:")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control-file",
+              attrs: {
+                type: "file",
+                name: "photo",
+                title: "Foto do Membro",
+                accept: "image/png, image/jpeg",
+                multiple: ""
+              }
+            })
+          ])
+        ])
       ])
     ])
   }
@@ -61006,7 +61105,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   forms: {
-    data: []
+    data: ''
   },
   form: '',
   active_button_add_form: true

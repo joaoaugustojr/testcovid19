@@ -97,6 +97,7 @@ export default {
 
         addUser(){
             let formData = new FormData(document.getElementById("form-add"));
+            formData.append('photo', $('input[type=file]')[0].files[0]); 
 
             this.saveUser(formData)
                 .then(response => {

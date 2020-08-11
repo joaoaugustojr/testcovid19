@@ -10833,3 +10833,9 @@ a.text-dark:focus {
   margin-top: -1rem;
 }
 
+.img-user {
+  width: 174px;
+  height: 272px;
+  object-fit: cover;
+}
+

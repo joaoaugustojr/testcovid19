@@ -40,6 +40,21 @@
                 <input type="text" name="whatsapp_number" v-model="number" v-on:focusout="validNumberForm" placeholder="Whastapp" title="Número do Whastapp" :class="['form-control', 'phone-cel', numberValid ? '' : 'is-invalid']" :disabled="view">
             </div>
         </div>
+        <div v-if="!view" class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card mb-3">
+                <div class="card-header d-flex">
+                    <div class="input-group">
+                        <label for="exampleFormControlFile1"><i class="fas fa-image"></i> Escolher Foto 3x4:</label>
+                        <input type="file" name="photo" class="form-control-file" title="Foto do Membro" accept="image/png, image/jpeg" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="user.photo_url" class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="text-center mb-3">
+                <img :src="'/storage/' + user.photo_url" alt="Photo" class="img-thumbnail img-user">
+            </div>
+        </div>
     </div>
 </template>
 

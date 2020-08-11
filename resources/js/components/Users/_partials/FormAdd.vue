@@ -40,6 +40,16 @@
                 <input type="text" name="whatsapp_number" v-model="number" v-on:focusout="validNumberForm" placeholder="Whastapp" title="Número do Whastapp" :class="['form-control', 'phone-cel', numberValid ? '' : 'is-invalid']">
             </div>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card mb-3">
+                <div class="card-header d-flex">
+                    <div class="input-group">
+                        <label for="exampleFormControlFile1"><i class="fas fa-image"></i> Escolher Foto 3x4:</label>
+                        <input type="file" name="photo" class="form-control-file" title="Foto do Membro" accept="image/png, image/jpeg" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -57,6 +67,7 @@ export default {
             name: '',
             age: '',
             number: '',
+            photo: '',
             cpfValid: true,
             numberValid: true
         }
@@ -81,8 +92,8 @@ export default {
                 this.age = '',
                 this.number = '',
                 this.cpfValid = true,
-                this.numberValid = true
-                console.log('limpou')
+                this.numberValid = true,
+                $('input[type=file]').val('')
             }
         },
     },

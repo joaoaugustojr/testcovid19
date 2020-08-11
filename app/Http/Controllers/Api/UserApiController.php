@@ -9,6 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserApiController extends Controller
 {
@@ -35,6 +36,12 @@ class UserApiController extends Controller
 
             $data = $request->all();
             $data['name'] = mb_strtoupper($data['name']);
+
+            if ($request->has('photo')) {
+                $path = $request->file('photo')->store('photos', 'public');
+                $data['photo_url'] = $path;
+            }
+
             User::create($data);
 
             DB::commit();
@@ -75,6 +82,13 @@ class UserApiController extends Controller
             $data = $request->except('_method');
             $data['name'] = mb_strtoupper($data['name']);
             $user = User::findOrFail($id);
+
+            if ($request->has('photo')) {
+                Storage::delete('public/'.$user->photo_url);
+                $path = $request->file('photo')->store('photos', 'public');
+                $data['photo_url'] = $path;
+            }
+            
             $user->update($data);
 
             DB::commit();
@@ -97,6 +111,9 @@ class UserApiController extends Controller
 
             DB::beginTransaction();
             $user = User::findOrFail($id);
+            if (!is_null($user->photo_url)) {
+                Storage::delete('public/' . $user->photo_url);
+            }
             $user->delete();
             DB::commit();
 
